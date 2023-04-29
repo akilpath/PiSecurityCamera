@@ -14,7 +14,7 @@ IMAGE_SIZE = (480, 640)
 # batch size
 BATCH_SIZE = 16
 
-datasetDir = "./dataset"
+datasetDir = "..//dataset"
 training_ds = tf.keras.utils.image_dataset_from_directory(datasetDir,
                                                           validation_split=0.2,
                                                           subset="training",
