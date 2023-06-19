@@ -35,7 +35,7 @@ def piTest():
         print(output_data)
 
 def computerTest():
-    MODELPATH = "./model20230618.tflite"
+    MODELPATH = "../training/model3.tflite"
     interpreter = tf.lite.Interpreter(model_path=MODELPATH)
     interpreter.allocate_tensors()
 

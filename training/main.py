@@ -37,6 +37,7 @@ training_ds = training_ds.cache().shuffle(1000).prefetch(buffer_size=tf.data.AUT
 val_ds = val_ds.cache().prefetch(buffer_size=tf.data.AUTOTUNE)
 model = tf.keras.models.Sequential([
     tf.keras.layers.RandomBrightness(0.3, input_shape=(IMAGE_SIZE[0], IMAGE_SIZE[1], 3)),
+    tf.keras.layers.RandomContrast(0.3),
     tf.keras.layers.Rescaling(1. / 255),
     tf.keras.layers.Conv2D(16, 3, padding='same', activation="relu"),
     tf.keras.layers.MaxPooling2D(),
