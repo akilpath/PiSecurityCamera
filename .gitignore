@@ -1,5 +1,6 @@
 
 dataset/
+sample/
 venv/
 *.tflite
 *.pb

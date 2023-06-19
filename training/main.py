@@ -10,9 +10,9 @@ import pathlib
 import tensorflow as tf
 
 # image height x width
-IMAGE_SIZE = (480, 640)
+IMAGE_SIZE = (500, 500)
 # batch size
-BATCH_SIZE = 32
+BATCH_SIZE = 64
 
 datasetDir = "..//dataset"
 training_ds = tf.keras.utils.image_dataset_from_directory(datasetDir,
@@ -31,7 +31,6 @@ val_ds = tf.keras.utils.image_dataset_from_directory(datasetDir,
 
 classNames = training_ds.class_names
 numOfClasses = len(classNames)
-print(type(training_ds))
 
 training_ds = training_ds.cache().shuffle(1000).prefetch(buffer_size=tf.data.AUTOTUNE)
 val_ds = val_ds.cache().prefetch(buffer_size=tf.data.AUTOTUNE)
@@ -45,8 +44,9 @@ model = tf.keras.models.Sequential([
     tf.keras.layers.MaxPooling2D(),
     tf.keras.layers.Flatten(),
     tf.keras.layers.Dropout(0.2),
-    tf.keras.layers.Dense(128, activation="relu"),
+    tf.keras.layers.Dense(500, activation="relu"),
     tf.keras.layers.Dropout(0.2),
+    tf.keras.layers.Dense(128, activation="relu"),
     tf.keras.layers.Dense(1, activation="sigmoid")
 ])
 
@@ -54,12 +54,18 @@ model.compile(optimizer='adam',
               loss="binary_crossentropy",
               metrics=["accuracy"])
 model.summary()
-epochs = 5
+epochs = 6
 history = model.fit(
     training_ds,
-    validation_data = val_ds,
-    epochs = epochs
+    validation_data=val_ds,
+    epochs=epochs
 )
 
+print("Save Model?")
 if input() == "y":
-    tf.saved_model.save(model, "./")
+    converter = tf.lite.TFLiteConverter.from_keras_model(model)
+    tfLiteModel = converter.convert()
+    print("Converted to tflite obj")
+    with open('model20230618.tflite', 'wb') as file:
+        file.write(tfLiteModel)
+    print('done')
