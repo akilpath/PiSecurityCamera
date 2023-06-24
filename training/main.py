@@ -1,12 +1,3 @@
-# import tensorflow as tf
-#
-# converter = tf.lite.TFLiteConverter.from_saved_model("./")
-# tfLiteModel = converter.convert()
-# with open('model20230415.tflite', 'wb') as file:
-#     file.write(tfLiteModel)
-# print('done')
-
-import pathlib
 import tensorflow as tf
 import matplotlib.pyplot as plt
 
@@ -52,6 +43,8 @@ model = tf.keras.models.Sequential([
     tf.keras.layers.Dense(128, activation="relu"),
     tf.keras.layers.Dense(1, activation="sigmoid")
 ])
+
+
 
 model.compile(optimizer='adam',
               loss="binary_crossentropy",
