@@ -34,7 +34,7 @@ def piTest():
         print(output_data)
 
 def computerTest():
-    MODELPATH = "../training/model3.tflite"
+    MODELPATH = "camera/model3.tflite"
     interpreter = tf.lite.Interpreter(model_path=MODELPATH)
     interpreter.allocate_tensors()
 
@@ -44,7 +44,7 @@ def computerTest():
     running = True
     samples = []
     for i in range(3):
-        sample = np.array(Image.open(f"../sample/sample{i + 1}.jpg"), dtype=np.float32)
+        sample = np.array(Image.open(f"sample/sample{i + 1}.jpg"), dtype=np.float32)
         sample = sample[np.newaxis, :]
         samples.append(sample)
 
