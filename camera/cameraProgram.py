@@ -1,4 +1,3 @@
-import numpy
 import tensorflow as tf
 # import picamera
 from PIL import Image

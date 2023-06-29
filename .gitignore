@@ -1,7 +1,8 @@
 
 dataset/
 sample/
-venv/
+.venv/
+.idea/
 *.tflite
 *.pb
 variables/variables.data-00000-of-00001
